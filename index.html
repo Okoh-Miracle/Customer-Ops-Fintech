@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fintech Customer Operations Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">FO</div>
+        <div>
+          <div class="brand-name">Fintech CX</div>
+          <div class="brand-sub">Customer Operations</div>
+        </div>
+      </div>
+      <nav class="nav" aria-label="Primary navigation">
+        <button class="nav-item active" data-section="overview"><span>Overview</span><span class="nav-badge">6</span></button>
+        <button class="nav-item" data-section="tickets"><span>Tickets</span><span class="nav-badge">18</span></button>
+        <button class="nav-item" data-section="customers"><span>Customers</span><span class="nav-badge">8</span></button>
+        <button class="nav-item" data-section="sla"><span>SLA Queue</span><span class="nav-badge warn">5</span></button>
+        <button class="nav-item" data-section="knowledge"><span>Knowledge Base</span></button>
+        <button class="nav-item" data-section="qa"><span>QA & Escalations</span><span class="nav-badge">4</span></button>
+        <button class="nav-item" data-section="audit"><span>Audit Log</span></button>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="status-dot"></div>
+        <div><strong>Operations healthy</strong><small>All queues monitored</small></div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">CUSTOMER EXPERIENCE OPERATIONS</p>
+          <h1 id="page-title">Customer Operations Overview</h1>
+          <p class="page-description" id="page-description">Monitor ticket volume, SLA exposure, customer risk, and support quality from one operating view.</p>
+        </div>
+        <div class="top-actions">
+          <label class="global-search"><span>⌕</span><input id="global-search" placeholder="Search tickets, customers, IDs…" /></label>
+          <button class="button ghost" id="refresh-btn">Refresh</button>
+          <button class="profile-chip"><span class="avatar">MO</span><span>Miracle</span><span>⌄</span></button>
+        </div>
+      </header>
+
+      <section id="section-overview" class="page-section active">
+        <div class="kpi-grid">
+          <article class="kpi-card"><div class="kpi-label">Open tickets</div><div class="kpi-value" id="kpi-open">18</div><div class="kpi-meta positive">↓ 12% vs yesterday</div></article>
+          <article class="kpi-card"><div class="kpi-label">SLA at risk</div><div class="kpi-value" id="kpi-sla">5</div><div class="kpi-meta warning">Needs action within 60 min</div></article>
+          <article class="kpi-card"><div class="kpi-label">First response</div><div class="kpi-value">7m</div><div class="kpi-meta positive">92% within target</div></article>
+          <article class="kpi-card"><div class="kpi-label">CSAT</div><div class="kpi-value">4.72</div><div class="kpi-meta positive">+0.18 this week</div></article>
+        </div>
+
+        <div class="grid-2-1">
+          <section class="panel">
+            <div class="panel-head"><div><h2>Ticket flow</h2><p>Volume across the last 7 operating days</p></div><span class="pill green">Live</span></div>
+            <div class="chart-wrap"><div class="bar-chart" id="volume-chart"></div><div class="chart-axis"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div></div>
+          </section>
+          <section class="panel">
+            <div class="panel-head"><div><h2>Top intents</h2><p>Current ticket mix</p></div></div>
+            <div id="intent-list" class="metric-list"></div>
+          </section>
+        </div>
+
+        <div class="grid-2-1">
+          <section class="panel">
+            <div class="panel-head"><div><h2>Priority queue</h2><p>Tickets requiring operational attention</p></div><button class="text-button" data-go="tickets">View all →</button></div>
+            <div id="priority-table" class="table-wrap"></div>
+          </section>
+          <section class="panel">
+            <div class="panel-head"><div><h2>Agent capacity</h2><p>Current workload by queue owner</p></div></div>
+            <div id="agent-capacity" class="agent-list"></div>
+          </section>
+        </div>
+      </section>
+
+      <section id="section-tickets" class="page-section">
+        <div class="section-toolbar"><div class="toolbar-title"><h2>Ticket Operations</h2><p>Search, classify, assign, and resolve customer issues.</p></div><div class="toolbar-controls"><select id="ticket-status"><option value="all">All status</option><option value="open">Open</option><option value="pending">Pending</option><option value="escalated">Escalated</option><option value="resolved">Resolved</option></select><select id="ticket-priority"><option value="all">All priority</option><option value="critical">Critical</option><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option></select></div></div>
+        <div class="stats-strip"><span><strong id="ticket-count">0</strong> visible</span><span>AI-classified <strong>94%</strong></span><span>Auto-routed <strong>87%</strong></span><span>Escalated <strong>4</strong></span></div>
+        <div class="panel"><div id="tickets-table" class="table-wrap"></div></div>
+      </section>
+
+      <section id="section-customers" class="page-section">
+        <div class="section-toolbar"><div class="toolbar-title"><h2>Customer Operations</h2><p>Customer context, risk signals, and support history.</p></div><label class="inline-search"><span>⌕</span><input id="customer-search" placeholder="Search customer or account ID" /></label></div>
+        <div class="customer-grid" id="customer-grid"></div>
+      </section>
+
+      <section id="section-sla" class="page-section">
+        <div class="section-toolbar"><div class="toolbar-title"><h2>SLA Queue</h2><p>Prioritize tickets by remaining response or resolution window.</p></div><span class="sla-summary"><strong>5</strong> at risk · <strong>1</strong> breached</span></div>
+        <div class="panel"><div id="sla-table" class="table-wrap"></div></div>
+      </section>
+
+      <section id="section-knowledge" class="page-section">
+        <div class="section-toolbar"><div class="toolbar-title"><h2>Knowledge Base</h2><p>Operational guidance agents can use during support.</p></div><label class="inline-search"><span>⌕</span><input id="kb-search" placeholder="Search articles" /></label></div>
+        <div class="kb-grid" id="kb-grid"></div>
+      </section>
+
+      <section id="section-qa" class="page-section">
+        <div class="section-toolbar"><div class="toolbar-title"><h2>QA & Escalations</h2><p>Review customer interactions and route higher-risk cases.</p></div><button class="button primary">Create review</button></div>
+        <div class="grid-2">
+          <section class="panel"><div class="panel-head"><div><h2>Escalation queue</h2><p>Cases requiring specialist intervention</p></div></div><div id="escalation-list" class="stack-list"></div></section>
+          <section class="panel"><div class="panel-head"><div><h2>Recent QA reviews</h2><p>Quality checks across resolved interactions</p></div></div><div id="qa-list" class="stack-list"></div></section>
+        </div>
+      </section>
+
+      <section id="section-audit" class="page-section">
+        <div class="section-toolbar"><div class="toolbar-title"><h2>Audit Log</h2><p>Chronological record of operational actions and routing events.</p></div><span class="pill neutral">Last 24 hours</span></div>
+        <div class="panel"><div id="audit-list" class="audit-list"></div></div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal" id="ticket-modal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close" id="modal-close" aria-label="Close">×</button>
+      <div id="modal-content"></div>
+    </div>
+  </div>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
