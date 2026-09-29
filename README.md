@@ -2,7 +2,7 @@
 
 A polished fintech customer-operations prototype for managing support tickets, SLA risk, customer context, knowledge workflows, QA reviews, escalations, and operational audit events.
 
-**Live demo:** https://okoh-miracle.github.io/fintech-customer-operations-platform/
+**Live demo:** https://okoh-miracle.github.io/fintech-customer-ops-fintech/
 
 ## What this demonstrates
 
